@@ -13,7 +13,7 @@ public class TestDB implements AutoCloseable {
 
 	private static final String URL = "jdbc:sqlite:res/db/user.db";
 	private static final String QUERY =
-		"SELECT id, fname, lname, age FROM users WHERE id = %s";
+		"SELECT id, fname, lname, age FROM users WHERE lname = '%s'";
 
 	private final Connection conn;
 

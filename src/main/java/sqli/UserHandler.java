@@ -28,8 +28,8 @@ public class UserHandler implements HttpHandler {
 			new InputStreamReader(exchange.getRequestBody()));
 		     TestDB db = new TestDB()) {
 			String body = in.lines().collect(joining());
-			String id = getUserId(body);
-			List<User> users = db.getUsers(id);
+			String lastName = getUserLastName(body);
+			List<User> users = db.getUsers(lastName);
 			String html = generateHtml(users);
 			exchange.sendResponseHeaders(200,html.length());
 			out.write(html.getBytes());
@@ -75,10 +75,10 @@ public class UserHandler implements HttpHandler {
 			user.getAge());
 	}
 
-	private String getUserId(String body) {
+	private String getUserLastName(String body) {
 		return Optional.ofNullable(body)
 			.map(this::utf8Decode)
-			.map(s -> s.replace("id=",""))
+			.map(s -> s.replace("lname=",""))
 			.orElseGet(() -> "");
 	}
 
