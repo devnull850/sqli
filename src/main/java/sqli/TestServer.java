@@ -13,6 +13,7 @@ public class TestServer {
 		HttpServer server = HttpServer.create(
 			new InetSocketAddress("localhost",8080), 0);
 		server.createContext("/", new IndexHandler());
+		server.createContext("/user", new UserHandler());
 		server.setExecutor(newSingleThreadExecutor());
 		server.start();
 	}
